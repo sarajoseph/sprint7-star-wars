@@ -18,25 +18,22 @@ export const Starship = () => {
     setHomePageIsActive(false)
   })
 
-  const { params } = useParams() 
+  const { params } = useParams()
   const starshipID = params !== undefined ? params : ''
-  
+
   const { status, error, data }: { status: string, error: string | null, data: any } = useQuery({
     queryKey: ['starships/'+starshipID],
     queryFn: () => fetchStarship(starshipID)
   })
-  
+
   if (status === 'error' && error) return <NotFound databaseError={error} />
 
   return (
     <>
       <Header />
-      <main className='py-8 px-12'>
-        {
-          status === 'pending' && <Loading />
-        }
-        {
-          status === 'success' && <StarshipDetails 
+      <main className='flex flex-col mx-auto py-8 px-12'>
+        {status === 'pending' && <Loading />}
+        {status === 'success' && <StarshipDetails
             starshipData={{
               id: starshipID,
               name: data.name,

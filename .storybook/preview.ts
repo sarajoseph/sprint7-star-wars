@@ -21,4 +21,4 @@ export const decorators = [
     },
     defaultTheme: 'dark',
   }),
-];
+]
