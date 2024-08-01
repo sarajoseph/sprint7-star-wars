@@ -2,28 +2,24 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useParams } from 'react-router-dom'
 import { Header } from '../components/header/Header'
-import { useContext, useEffect } from 'react'
-import { ContextCreator } from '../context/Context'
-import { useQuery } from '@tanstack/react-query'
-import { fetchStarship } from '../services/data'
+import { useEffect } from 'react'
 import { NotFound } from './NotFound'
 import { Loading } from '../components/icons/Loading'
 import { StarshipDetails } from '../components/StarshipDetails'
+import { useAppDispatch } from '../hooks/store'
+import { setStarshipsPageIsActive } from '../store/starshipsPageIsActive/slice'
+import { setHomePageIsActive } from '../store/homePageIsActive/slice'
+import { getStarshipByID } from '../store/starships/slice'
 
 export const Starship = () => {
-  const { setStarshipsPageIsActive, setHomePageIsActive } = useContext(ContextCreator)
-
-  useEffect(() => {
-    setStarshipsPageIsActive(true)
-    setHomePageIsActive(false)
-  })
-
+  const dispatch = useAppDispatch()
   const { params } = useParams()
   const starshipID = params !== undefined ? params : ''
+  const { status, error, data } = getStarshipByID(starshipID)
 
-  const { status, error, data }: { status: string, error: string | null, data: any } = useQuery({
-    queryKey: ['starships/'+starshipID],
-    queryFn: () => fetchStarship(starshipID)
+  useEffect(() => {
+    dispatch(setStarshipsPageIsActive(true))
+    dispatch(setHomePageIsActive(false))
   })
 
   if (status === 'error' && error) return <NotFound databaseError={error} />
