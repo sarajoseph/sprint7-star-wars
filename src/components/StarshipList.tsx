@@ -1,9 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
-export const StarshipList = ({ name, model }: { name: string, model: string }) => {
+import { Link } from 'react-router-dom'
+import { StarshipBasicProps } from '../types/global'
+
+export const StarshipList = ({ starship }: { starship: StarshipBasicProps }) => {
   return (
-    <div key={name} className="bg-zinc-900 p-4">
-      <p className="uppercase font-bold">{name}</p>
-      <p className="text-sm	">{model}</p>
-    </div>
+    <Link to={`/starships/starship/${starship.id}`} className="bg-zinc-900 p-4 hover:bg-zinc-800 transition duration-500">
+      <p className="uppercase font-bold">{starship.name}</p>
+      <p className="text-sm	">{starship.model}</p>
+    </Link>
   )
 }
