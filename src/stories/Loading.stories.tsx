@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/react-in-jsx-scope */
 import { Loading } from '../components/icons/Loading'
 
@@ -22,7 +23,7 @@ export default {
     type: 'loading-spinner',
     size: 'loading-lg'
   }
-} 
-const Template = args => <Loading {...args} />
+}
+const Template = (args: any) => <Loading {...args} />
 
 export const Default = Template.bind({})

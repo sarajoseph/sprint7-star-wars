@@ -4,7 +4,7 @@ export const starshipsPageIsActiveSlice = createSlice({
   name: 'starshipsPageIsActive',
   initialState: false,
   reducers: {
-    setStarshipsPageIsActive: (state, action) => {
+    setStarshipsPageIsActive: (_state, action) => {
       return action.payload
     }
   }

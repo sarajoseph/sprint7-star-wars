@@ -25,7 +25,7 @@ export const Starships = () => {
 
   useEffect(() => {
     if (isSuccess && starshipsData) {
-      const newStarships: StarshipBasicProps[] = starshipsData.map((s: StarshipDataTotalProps) => ({
+      const newStarships: StarshipBasicProps[] = starshipsData.filter((e) => e !== null).map((s: StarshipDataTotalProps) => ({
         id: getStarshipID(s.url),
         name: s.name,
         model: s.model

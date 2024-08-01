@@ -2,7 +2,6 @@
 import { UseFormRegister } from 'react-hook-form'
 import { UsernameIcon, EmailIcon, PasswordIcon } from '../icons/UserFieldsIcons'
 import { FormRegisterInputs } from '../../types/global'
-import { Children, PropsWithChildren } from 'react'
 
 export const EmailField = ({register}: {register?: UseFormRegister<FormRegisterInputs>}) => {
   return (

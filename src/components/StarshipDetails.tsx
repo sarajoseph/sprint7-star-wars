@@ -6,7 +6,7 @@ import { SectionTitle } from './SectionTitle'
 import { checkURLExists } from '../logic/global'
 
 export const StarshipDetails = ({starshipData}: {starshipData: StarshipDataProps}) => {
-  const DEFAULT_IMG_URL = '/public/images/default-no-image.jpg'
+  const DEFAULT_IMG_URL = '/images/default-no-image.jpg'
   const IMG_URL = 'https://starwars-visualguide.com/assets/img/starships/'+starshipData.id+'.jpg'
   const [ imageExists, setImageExists ] = useState(false)
 

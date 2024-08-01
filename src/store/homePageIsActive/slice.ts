@@ -4,7 +4,7 @@ export const homePageIsActiveSlice = createSlice({
   name: 'homePageIsActive',
   initialState: false,
   reducers: {
-    setHomePageIsActive: (state, action) => {
+    setHomePageIsActive: (_state, action) => {
       return action.payload
     }
   }

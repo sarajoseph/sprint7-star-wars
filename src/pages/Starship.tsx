@@ -16,7 +16,6 @@ export const Starship = () => {
   const { params } = useParams()
   const starshipID = params !== undefined ? params : ''
   const { status, error, data } = getStarshipByID(starshipID)
-
   useEffect(() => {
     dispatch(setStarshipsPageIsActive(true))
     dispatch(setHomePageIsActive(false))
@@ -29,7 +28,7 @@ export const Starship = () => {
       <Header />
       <main className='flex flex-col mx-auto py-8 px-12'>
         {status === 'pending' && <Loading />}
-        {status === 'success' && <StarshipDetails
+        {status === 'success' && data && <StarshipDetails
             starshipData={{
               id: starshipID,
               name: data.name,
