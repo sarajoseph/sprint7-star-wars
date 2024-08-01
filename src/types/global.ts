@@ -34,3 +34,8 @@ export type StarshipDataTotalProps = {
   edited: string
   url: string
 }
+export type FormRegisterInputs = {
+  username: string
+  email: string
+  password: string
+}

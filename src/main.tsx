@@ -8,6 +8,8 @@ import { Starship } from './pages/Starship.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { store } from './store'
 import { Provider } from 'react-redux'
+import { Login } from './pages/Login.tsx'
+import { Register } from './pages/Register.tsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,16 @@ const router = createBrowserRouter([
   {
     path: '/starships/starship/:params',
     element: <Starship />,
+    errorElement: <NotFound />
+  },
+  {
+    path: '/login',
+    element: <Login />,
+    errorElement: <NotFound />
+  },
+  {
+    path: '/register',
+    element: <Register />,
     errorElement: <NotFound />
   },
 ])
