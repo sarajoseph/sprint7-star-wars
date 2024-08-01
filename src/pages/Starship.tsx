@@ -9,7 +9,7 @@ import { StarshipDetails } from '../components/StarshipDetails'
 import { useAppDispatch } from '../hooks/store'
 import { setStarshipsPageIsActive } from '../store/starshipsPageIsActive/slice'
 import { setHomePageIsActive } from '../store/homePageIsActive/slice'
-import { getStarshipByID } from '../store/starships/slice'
+import { getStarshipByID } from '../hooks/useGetStarshipByID'
 
 export const Starship = () => {
   const dispatch = useAppDispatch()

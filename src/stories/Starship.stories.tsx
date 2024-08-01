@@ -1,14 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { StarshipList } from '../components/StarshipList'
+import { StarshipElement } from '../components/StarshipElement'
 
 export default {
-  component: StarshipList,
-  title: 'Starships/StarshipList',
+  component: StarshipElement,
+  title: 'Starships/StarshipElement',
   args: {
     name: 'STAR DESTROYER',
     model: 'Imperial I-class Star Destroyer'
   }
-} 
-const Template = args => <StarshipList {...args} />
+}
+const Template = args => <StarshipElement {...args} />
 
 export const Default = Template.bind({})
