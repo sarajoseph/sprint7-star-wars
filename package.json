@@ -12,8 +12,10 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
@@ -22,8 +24,9 @@
     "@storybook/addon-interactions": "^8.2.2",
     "@storybook/addon-links": "^8.2.2",
     "@storybook/addon-onboarding": "^8.2.2",
+    "@storybook/addon-themes": "^8.2.4",
     "@storybook/blocks": "^8.2.2",
-    "@storybook/react": "^8.2.2",
+    "@storybook/react": "^8.2.4",
     "@storybook/react-vite": "^8.2.2",
     "@storybook/test": "^8.2.2",
     "@tailwindcss/typography": "^0.5.13",
@@ -41,10 +44,12 @@
     "eslint-plugin-storybook": "^0.8.0",
     "globals": "^15.8.0",
     "storybook": "^8.2.2",
+    "storybook-addon-remix-react-router": "^3.0.0",
     "tailwindcss": "^3.4.4",
     "ts-standard": "^12.0.2",
     "typescript": "^5.2.2",
     "typescript-eslint": "^7.16.0",
     "vite": "^5.3.1"
-  }
+  },
+  "packageManager": "pnpm@8.15.5+sha1.a58c038faac410c947dbdb93eb30994037d0fce2"
 }

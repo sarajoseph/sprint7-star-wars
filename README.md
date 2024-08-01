@@ -56,6 +56,14 @@ npx tailwindcss -i ./src/assets/css/tailwind-input.css -o ./src/assets/css/tailw
 ```
   
   
+### Start Storybook    
+  
+```bash
+# Run
+npm run storybook
+```
+  
+  
 ### ESLint StandardJS test  
   
 Find and fix problems with your JavaScript code
