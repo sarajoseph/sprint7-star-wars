@@ -3,31 +3,16 @@ import { Link } from 'react-router-dom'
 import { Header } from '../components/header/Header'
 import { EmailField, ErrorFieldMessage, PasswordField, UsernameField } from '../components/forms/FormFields'
 import { userRegister } from '../logic/users'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Loading } from '../components/icons/Loading'
 import { ErrorIcon } from '../components/icons/ErrorIcon'
 import { SuccessIcon } from '../components/icons/SuccessIcon'
 import { FieldValues, useForm } from 'react-hook-form'
 import { FormRegisterInputs } from '../types/global'
+import { StarwarsContext } from '../context/StarwarsContext'
 export const Register = () => {
-  /*
-    TAREAS PENDIENTES
-      X Si se ha iniciado sesión, mantener sesión de usuario aunque se actualice la página
-      - Redirecciones:
-        X Al iniciar sesión redirigir a home
-        X Al iniciar sesión automáticamente después del registro, redirigir a home
-        X Redirigir a home o actualizar página después de hacer logout
-      - Subir repositorio a Vercel y Netlify
-
-    PROTECCIÓN RUTAS
-      - ACCESO SOLO CON LOGIN
-        - /starships
-        - /starships/starship/:params
-      - ACCESO SOLO SIN LOGIN
-        - /login
-        - /register
-  */
   const [ registerStatus, setRegisterStatus ] = useState<null | string>(null)
+  const { setUsername } = useContext(StarwarsContext)
   const {
     register,
     handleSubmit,
@@ -35,7 +20,7 @@ export const Register = () => {
   } = useForm<FormRegisterInputs>()
 
   const onSubmit = (data: FieldValues) => {
-    userRegister(data.username, data.email, data.password, setRegisterStatus)
+    userRegister(data.username, data.email, data.password, setRegisterStatus, setUsername)
   }
 
   return (

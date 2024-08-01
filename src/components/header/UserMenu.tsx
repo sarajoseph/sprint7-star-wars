@@ -4,28 +4,33 @@ import { Link } from 'react-router-dom'
 import { authFirebase } from '../../firebase/client'
 import { userLogout } from '../../logic/users'
 import { onAuthStateChanged } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserIcon } from '../icons/UserIcon'
 import { LogoutIcon } from '../icons/LogoutIcon'
+import { setUserSession } from '../../store/userSession/slice'
+import { useAppDispatch } from '../../hooks/store'
+import { StarwarsContext } from '../../context/StarwarsContext'
 
 export const UserMenu = () => {
-  const [ username, setUsername ] = useState<null | string>(null)
-
+  const dispatch = useAppDispatch()
+  const { username, setUsername } = useContext(StarwarsContext)
   useEffect(() => {
     onAuthStateChanged(authFirebase, (user) => {
       if (user) {
         // User logueado
         setUsername(user.displayName)
+        dispatch(setUserSession(true))
       } else {
         // User no logueado
         setUsername(null)
+        dispatch(setUserSession(false))
       }
     })
   }, [])
 
   return (
     <div className="flex justify-end w-2/5 items-center gap-x-2">
-    {username !== null ?
+    {authFirebase.currentUser !== null ?
       <>
       <UserIcon />
       <p>¡Hola <b className="capitalize ml">{username}</b>!</p>

@@ -2,26 +2,25 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
 import { authFirebase } from '../firebase/client'
 
-export const userRegister = (displayName: string, email: string, password: string, setRegisterStatus: React.Dispatch<React.SetStateAction<null | string>> ) => {
+export const userRegister = (
+  displayName: string,
+  email: string,
+  password: string,
+  setRegisterStatus: React.Dispatch<React.SetStateAction<null | string>>,
+  setUsername: any
+) => {
   setRegisterStatus('loading')
-  createUserWithEmailAndPassword(authFirebase, email, password)
+  createUserWithEmailAndPassword(authFirebase,
+    email, password)
     .then(() => {
       if (authFirebase.currentUser !== null) {
         // Add username to the profile
         updateProfile(authFirebase.currentUser, { displayName })
           .then(() => {
             setRegisterStatus('success')
-            // Login after success registration
-            signInWithEmailAndPassword(authFirebase, email, password)
-              .then(() => {
-                // Success, redirect to home
-                window.location.href = '/'
-              })
-              .catch((error) => {
-                console.log(error)
-                console.log(error.code)
-                console.log(error.message)
-              })
+            authFirebase.currentUser?.reload().then(() => {
+              setUsername(authFirebase.currentUser?.displayName)
+            })
           }).catch((error) => {
             console.log(error)
             setRegisterStatus(error.message)
@@ -43,7 +42,6 @@ export const userLogin = (e: any, setLoginStatus: React.Dispatch<React.SetStateA
   signInWithEmailAndPassword(authFirebase, email, password)
     .then(() => {
       setLoginStatus('success')
-      console.log('success')
     })
     .catch((error) => {
       console.log(error)
@@ -66,7 +64,6 @@ export const userLogin = (e: any, setLoginStatus: React.Dispatch<React.SetStateA
 export const userLogout = () => {
   signOut(authFirebase).then(() => {
     console.log('Logout successful')
-    window.location.href = '/'
   }).catch((error) => {
     console.log(error)
     console.log(error.code)

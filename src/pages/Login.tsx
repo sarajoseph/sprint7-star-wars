@@ -11,8 +11,6 @@ import { userLogin } from '../logic/users'
 export const Login = () => {
   const [ loginStatus, setLoginStatus ] = useState<null | string>(null)
 
-  if (loginStatus === 'success') window.location.href = '/'
-
   return (
     <>
     <Header />
