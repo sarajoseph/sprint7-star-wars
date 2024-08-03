@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { UseFormRegister } from 'react-hook-form'
 import { UsernameIcon, EmailIcon, PasswordIcon } from '../icons/UserFieldsIcons'
-import { FormRegisterInputs } from '../../types/global'
+import { FormRegisterInputs } from '../../global/types'
 
 export const EmailField = ({register}: {register?: UseFormRegister<FormRegisterInputs>}) => {
   return (

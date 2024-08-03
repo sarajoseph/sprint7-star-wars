@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { StarshipDataTotalProps } from '../types/global'
+import { StarshipDataProps } from '../global/types'
 import { fetchStarships } from '../services/starships'
 
 export const useStarships = () => {
@@ -20,7 +20,7 @@ export const useStarships = () => {
     initialPageParam: undefined
   })
 
-  const starshipsData: (StarshipDataTotalProps | null)[] | [] = data?.pages?.flatMap(page => page?.starships) ?? []
+  const starshipsData: (StarshipDataProps | null)[] | [] = data?.pages?.flatMap(page => page?.starships) ?? []
 
   return {
     isPending,

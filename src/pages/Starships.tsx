@@ -2,14 +2,14 @@
 import { Header } from '../components/header/Header'
 import { Loading } from '../components/icons/Loading'
 import { StarshipElement } from '../components/StarshipElement'
-import { StarshipBasicProps, StarshipDataTotalProps } from '../types/global'
+import { StarshipBasicProps, StarshipDataProps } from '../global/types'
 import { NotFound } from './NotFound'
 import { useAppDispatch, useAppSelector } from '../hooks/store'
 import { useEffect } from 'react'
 import { setHomePageIsActive } from '../store/homePageIsActive/slice'
 import { setStarshipsPageIsActive } from '../store/starshipsPageIsActive/slice'
 import { setStarships } from '../store/starships/slice'
-import { getStarshipID } from '../logic/starships'
+import { getIDFromURL } from '../logic/main'
 import { useStarships } from '../hooks/useStarships'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -25,8 +25,8 @@ export const Starships = () => {
 
   useEffect(() => {
     if (isSuccess && starshipsData) {
-      const newStarships: StarshipBasicProps[] = starshipsData.filter((e) => e !== null).map((s: StarshipDataTotalProps) => ({
-        id: getStarshipID(s.url),
+      const newStarships: StarshipBasicProps[] = starshipsData.filter((e) => e !== null).map((s: StarshipDataProps) => ({
+        id: getIDFromURL(s.url),
         name: s.name,
         model: s.model
       }))

@@ -1,16 +1,17 @@
 import { useLocation } from 'react-router-dom'
 
-export const checkURLExists = async (url: string, setURL: React.Dispatch<React.SetStateAction<boolean>>) => {
+export const getIDFromURL = (url: string) => {
+  const urlParts = url.split('/')
+  return urlParts[urlParts.length - 2]
+}
+
+export const checkURLExists = async (url: string) => {
   try {
     const response = await fetch(url)
-    if (response.ok) {
-      setURL(true)
-    } else {
-      setURL(false)
-    }
+    return response.ok ? true : false
   } catch (error) {
     console.log(error)
-    setURL(false)
+    return false
   }
 }
 

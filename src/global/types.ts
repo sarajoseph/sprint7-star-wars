@@ -8,15 +8,6 @@ export type StarshipBasicProps = {
   model: string
 }
 export type StarshipDataProps = StarshipBasicProps & {
-  cost_in_credits: string
-  max_atmosphering_speed: string
-  manufacturer: string
-  length: string
-  crew: string
-}
-export type StarshipDataTotalProps = {
-  name: string
-  model: string
   manufacturer: string
   cost_in_credits: string
   length: string
@@ -39,3 +30,14 @@ export type FormRegisterInputs = {
   email: string
   password: string
 }
+export type PilotsType = {
+  id: string,
+  name: string,
+  image: string,
+}[]
+export type FilmsType = {
+  id: string,
+  title: string,
+  episode_id: number,
+  image: string,
+}[]

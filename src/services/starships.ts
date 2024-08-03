@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { StarshipDataProps, StarshipDataTotalProps } from '../types/global'
+import { StarshipDataProps } from '../global/types'
 const API_URL = 'https://swapi.dev/api/'
 const API_URL_STARSHIPS = API_URL+'starships/'
 
@@ -7,7 +7,7 @@ export const fetchStarships = async ({pageParam = API_URL_STARSHIPS}: {pageParam
   try {
     const fetchResponse = await axios.get(pageParam)
     const response: {
-      starships: StarshipDataTotalProps[] | null,
+      starships: StarshipDataProps[] | null,
       nextUrl: string | null
     } = {
       starships: fetchResponse.data.results,
@@ -28,11 +28,11 @@ export const fetchStarships = async ({pageParam = API_URL_STARSHIPS}: {pageParam
 export const fetchStarship = async (id: string | undefined) => {
   try {
     const response = await axios.get(API_URL_STARSHIPS+id)
-    const data: StarshipDataProps = {
+    const starshipData: StarshipDataProps = {
       id,
       ...response.data
     }
-    return data
+    return starshipData
 
   } catch (error) {
     console.error('Error fetching the starships:', error)

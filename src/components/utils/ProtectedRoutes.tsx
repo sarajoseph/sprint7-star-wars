@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/store'
-import { getLoginWithPreviousUrl, getURLAfterLogin } from '../../logic/global'
+import { getLoginWithPreviousUrl, getURLAfterLogin } from '../../logic/main'
 
 // User without login can not access to starship pages
 export const PrivateRoutes = () => {

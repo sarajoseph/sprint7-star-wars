@@ -10,12 +10,14 @@ import { useAppDispatch } from '../hooks/store'
 import { setStarshipsPageIsActive } from '../store/starshipsPageIsActive/slice'
 import { setHomePageIsActive } from '../store/homePageIsActive/slice'
 import { getStarshipByID } from '../hooks/useGetStarshipByID'
+import { StarshipPilots } from '../components/StarshipPilots'
+import { StarshipFilms } from '../components/StarshipFilms'
 
 export const Starship = () => {
   const dispatch = useAppDispatch()
   const { params } = useParams()
   const starshipID = params !== undefined ? params : ''
-  const { status, error, data } = getStarshipByID(starshipID)
+  const { status, error, starshipData } = getStarshipByID(starshipID)
   useEffect(() => {
     dispatch(setStarshipsPageIsActive(true))
     dispatch(setHomePageIsActive(false))
@@ -28,18 +30,12 @@ export const Starship = () => {
       <Header />
       <main className='flex flex-col mx-auto py-8 px-12'>
         {status === 'pending' && <Loading />}
-        {status === 'success' && data && <StarshipDetails
-            starshipData={{
-              id: starshipID,
-              name: data.name,
-              model: data.model,
-              cost_in_credits: data.cost_in_credits,
-              max_atmosphering_speed: data.max_atmosphering_speed,
-              manufacturer: data.manufacturer,
-              length: data.length,
-              crew: data.crew,
-            }}
-          />
+        {status === 'success' && starshipData &&
+          <>
+            <StarshipDetails starshipData={{...starshipData}} />
+            <StarshipPilots pilotsLinks={starshipData.pilots} />
+            <StarshipFilms filmsLinks={starshipData.films} />
+          </>
         }
       </main>
     </>

@@ -8,7 +8,7 @@ import { Loading } from '../components/icons/Loading'
 import { ErrorIcon } from '../components/icons/ErrorIcon'
 import { SuccessIcon } from '../components/icons/SuccessIcon'
 import { FieldValues, useForm } from 'react-hook-form'
-import { FormRegisterInputs } from '../types/global'
+import { FormRegisterInputs } from '../global/types'
 import { StarwarsContext } from '../context/StarwarsContext'
 export const Register = () => {
   const [ registerStatus, setRegisterStatus ] = useState<null | string>(null)

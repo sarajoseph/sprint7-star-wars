@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Link } from 'react-router-dom'
-import { StarshipBasicProps } from '../types/global'
+import { StarshipBasicProps } from '../global/types'
 
 export const StarshipElement = ({ starship }: { starship: StarshipBasicProps }) => {
   return (
