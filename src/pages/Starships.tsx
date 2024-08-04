@@ -2,39 +2,19 @@
 import { Header } from '../components/header/Header'
 import { Loading } from '../components/icons/Loading'
 import { StarshipElement } from '../components/StarshipElement'
-import { StarshipBasicProps, StarshipDataProps } from '../global/types'
+import { StarshipBasicProps } from '../global/types'
 import { NotFound } from './NotFound'
-import { useAppDispatch, useAppSelector } from '../hooks/store'
-import { useEffect } from 'react'
-import { setHomePageIsActive } from '../store/homePageIsActive/slice'
-import { setStarshipsPageIsActive } from '../store/starshipsPageIsActive/slice'
-import { setStarships } from '../store/starships/slice'
-import { getIDFromURL } from '../logic/main'
+import { useAppSelector } from '../hooks/store'
 import { useStarships } from '../hooks/useStarships'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useNavMenu } from '../hooks/useNavMenu'
 
 export const Starships = () => {
-  const dispatch = useAppDispatch()
   const starships = useAppSelector((state) => state.starships)
-  const { isPending, isSuccess, isError, data, starshipsData, error, fetchNextPage, hasNextPage } = useStarships()
+  const { isPending, isSuccess, isError, error, fetchNextPage, hasNextPage } = useStarships()
+  useNavMenu(false, true)
 
-  useEffect(() => {
-    dispatch(setStarshipsPageIsActive(true))
-    dispatch(setHomePageIsActive(false))
-  })
-
-  useEffect(() => {
-    if (isSuccess && starshipsData) {
-      const newStarships: StarshipBasicProps[] = starshipsData.filter((e) => e !== null).map((s: StarshipDataProps) => ({
-        id: getIDFromURL(s.url),
-        name: s.name,
-        model: s.model
-      }))
-      dispatch(setStarships(newStarships))
-    }
-  }, [isSuccess, data])
-
-  if (isError && error) return <NotFound databaseError={error.toString()} />
+  if (isError && error) return <NotFound databaseError={error} />
 
   return (
     <>

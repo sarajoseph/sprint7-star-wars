@@ -12,10 +12,11 @@ export const fetchPilots = async (url: string) => {
 
   } catch (error) {
     console.error('Error fetching the starships pilots:', error)
-    const error_message = axios.isAxiosError(error)
-      ? 'Error '+error.response?.status || 500 +': '+ error.message || 'An unexpected error occurred'
-      : 'Error 500: An unexpected error occurred'
-
-    throw error_message
+    if (axios.isAxiosError(error)) {
+      const error_message = error.message || 'An unexpected error occurred'
+      const error_code = error.response?.status || 500
+      throw new Error('Error '+error_code+': '+error_message)
+    }
+    throw new Error('Error 500: An unexpected error occurred')
   }
 }

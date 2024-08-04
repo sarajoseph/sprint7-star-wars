@@ -2,25 +2,29 @@
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header/Header'
 import { EmailField, ErrorFieldMessage, PasswordField, UsernameField } from '../components/forms/FormFields'
-import { userRegister } from '../logic/users'
-import { useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Loading } from '../components/icons/Loading'
 import { ErrorIcon } from '../components/icons/ErrorIcon'
 import { SuccessIcon } from '../components/icons/SuccessIcon'
 import { FieldValues, useForm } from 'react-hook-form'
 import { FormRegisterInputs } from '../global/types'
-import { StarwarsContext } from '../context/StarwarsContext'
+import { useSignUp } from '../hooks/useSignUp'
 export const Register = () => {
-  const [ registerStatus, setRegisterStatus ] = useState<null | string>(null)
-  const { setUsername } = useContext(StarwarsContext)
+  const [ status, setStatus ] = useState<null | string>(null)
+  const { signUpStatus, signUp } = useSignUp()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormRegisterInputs>()
 
-  const onSubmit = (data: FieldValues) => {
-    userRegister(data.username, data.email, data.password, setRegisterStatus, setUsername)
+  useEffect(() => {
+    setStatus(signUpStatus)
+  }, [signUpStatus])
+
+  const onSubmit = async (data: FieldValues) => {
+    await signUp(data.username, data.email, data.password)
+    setStatus(signUpStatus)
   }
 
   return (
@@ -41,14 +45,14 @@ export const Register = () => {
         {errors.password &&
           <ErrorFieldMessage message={errors.password.message} />
         }
-        {registerStatus !== null && registerStatus !== 'success' && registerStatus !== 'loading' &&
-          <div role="alert" className="alert alert-error text-sm"> <ErrorIcon /> <span>{registerStatus}</span></div>
+        {status !== null && status !== 'success' && status !== 'loading' &&
+          <div role="alert" className="alert alert-error text-sm"> <ErrorIcon /> <span>{status}</span></div>
         }
-        {registerStatus === 'success' &&
+        {status === 'success' &&
           <div role="alert" className="alert alert-success text-sm"> <SuccessIcon /> <span>Registration has been completed successfully</span></div>
         }
         <div className="flex flex-col gap-y-2 mt-5">
-          <button className="btn btn-primary">{registerStatus === 'loading' ? <Loading size='loading-sm'/> : 'Register'}</button>
+          <button className="btn btn-primary">{status === 'loading' ? <Loading size='loading-sm'/> : 'Register'}</button>
           <Link to="/login" className="btn">Login</Link>
         </div>
       </form>

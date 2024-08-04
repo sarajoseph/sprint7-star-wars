@@ -1,16 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header/Header'
-import { useAppDispatch } from '../hooks/store'
-import { useEffect } from 'react'
-import { setHomePageIsActive } from '../store/homePageIsActive/slice'
-import { setStarshipsPageIsActive } from '../store/starshipsPageIsActive/slice'
+import { useNavMenu } from '../hooks/useNavMenu'
 export const Home = () => {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(setHomePageIsActive(true))
-    dispatch(setStarshipsPageIsActive(false))
-  })
+  useNavMenu(true, false)
 
   return (
 		<>

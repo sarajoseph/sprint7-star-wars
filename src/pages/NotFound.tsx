@@ -3,13 +3,13 @@
 import { Link, useRouteError } from 'react-router-dom'
 import { Header } from '../components/header/Header'
 
-export const NotFound = ({databaseError}: {databaseError?: string | undefined}) => {
+export const NotFound = ({databaseError}: {databaseError?: Error}) => {
   const getErrorMessage = (): string => {
-    const routeError: any = useRouteError()
     if (databaseError !== undefined) {
-      return databaseError
+      return databaseError.message
     } else {
-      const msg = routeError.error.message || routeError.statusText
+      const routeError: any = useRouteError()
+      const msg = routeError.error?.message || routeError.statusText
       return 'Error '+routeError.status+': '+msg
     }
   }

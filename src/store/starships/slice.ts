@@ -6,9 +6,8 @@ export const starshipsSlice = createSlice({
   name: 'starships',
   initialState: [],
   reducers: {
-    setStarships: (state, action) => {
-      state = action.payload
-      return state
+    setStarships: (_state, action) => {
+      return action.payload
     }
   }
 })

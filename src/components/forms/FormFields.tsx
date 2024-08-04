@@ -16,7 +16,7 @@ export const EmailField = ({register}: {register?: UseFormRegister<FormRegisterI
             {...register('email', {
               required: 'Email is required',
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
                 message: 'Please enter a valid email',
               }
             })}
@@ -80,5 +80,5 @@ export const UsernameField = ({register}: {register?: UseFormRegister<FormRegist
 }
 
 export const ErrorFieldMessage = ({message}: {message: string | undefined }) => (
-  <p className="text-xs text-error">{message = message || 'Error'}</p>
+  <p className="text-xs text-error">{message ?? 'Error'}</p>
 )

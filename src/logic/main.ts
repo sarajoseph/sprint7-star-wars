@@ -8,7 +8,7 @@ export const getIDFromURL = (url: string) => {
 export const checkURLExists = async (url: string) => {
   try {
     const response = await fetch(url)
-    return response.ok ? true : false
+    return response.ok
   } catch (error) {
     console.log(error)
     return false

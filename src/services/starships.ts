@@ -16,12 +16,14 @@ export const fetchStarships = async ({pageParam = API_URL_STARSHIPS}: {pageParam
     return response
 
   } catch (error) {
-    console.error('Error fetching the starships:', error)
-    const error_message = axios.isAxiosError(error)
-      ? 'Error '+error.response?.status || 500 +': '+ error.message || 'An unexpected error occurred'
-      : 'Error 500: An unexpected error occurred'
+    console.error('Error fetching the starships: '+error)
 
-    throw error_message
+    if (axios.isAxiosError(error)) {
+      const error_message = error.message || 'An unexpected error occurred'
+      const error_code = error.response?.status || 500
+      throw new Error('Error '+error_code+': '+error_message)
+    }
+    throw new Error('Error 500: An unexpected error occurred')
   }
 }
 
@@ -35,12 +37,16 @@ export const fetchStarship = async (id: string | undefined) => {
     return starshipData
 
   } catch (error) {
-    console.error('Error fetching the starships:', error)
-    const error_message = axios.isAxiosError(error) ?
-      'Error '+error.response?.status || 500+': '+ error.code === 'ERR_BAD_REQUEST' ? 'The starship was not found, try again' : error.message
-      :
-      'Error 500: An unexpected error occurred'
+    console.error('Error fetching the starship: '+error)
 
-    throw error_message
+    if (axios.isAxiosError(error)) {
+      const error_message = error.code === 'ERR_BAD_REQUEST'
+        ? 'The starship was not found, try again'
+        : error.message
+      const error_code = error.response?.status || 500
+      throw new Error('Error '+error_code+': '+error_message)
+    }
+
+    throw new Error('Error 500: An unexpected error occurred')
   }
 }

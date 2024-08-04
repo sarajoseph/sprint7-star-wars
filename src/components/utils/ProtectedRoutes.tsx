@@ -1,13 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAppSelector } from '../../hooks/store'
 import { getLoginWithPreviousUrl, getURLAfterLogin } from '../../logic/main'
+import { useContext } from 'react'
+import { StarwarsContext } from '../../context/StarwarsContext'
 
 // User without login can not access to starship pages
 export const PrivateRoutes = () => {
-  const userSession = useAppSelector((state) => state.userSession)
+  const { username } = useContext(StarwarsContext)
   const navigateTo = getLoginWithPreviousUrl()
-  if (!userSession) {
+  if (username === null) {
     return <Navigate to={navigateTo} replace />
   }
   return <Outlet />
@@ -15,9 +16,9 @@ export const PrivateRoutes = () => {
 
 // User with login can not access to login and register pages
 export const PublicRoutes = () => {
-  const userSession = useAppSelector((state) => state.userSession)
-  const urlAfterLogin: string = getURLAfterLogin() || '/'
-  if (userSession) {
+  const { username } = useContext(StarwarsContext)
+  const urlAfterLogin: string = getURLAfterLogin() ?? '/'
+  if (username !== null) {
     return <Navigate to={urlAfterLogin} replace />
   }
   return <Outlet />

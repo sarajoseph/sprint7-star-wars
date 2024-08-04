@@ -3,30 +3,12 @@
 import { Link } from 'react-router-dom'
 import { authFirebase } from '../../firebase/client'
 import { userLogout } from '../../logic/users'
-import { onAuthStateChanged } from 'firebase/auth'
-import { useContext, useEffect } from 'react'
 import { UserIcon } from '../icons/UserIcon'
 import { LogoutIcon } from '../icons/LogoutIcon'
-import { setUserSession } from '../../store/userSession/slice'
-import { useAppDispatch } from '../../hooks/store'
-import { StarwarsContext } from '../../context/StarwarsContext'
+import { useUser } from '../../hooks/useUser'
 
 export const UserMenu = () => {
-  const dispatch = useAppDispatch()
-  const { username, setUsername } = useContext(StarwarsContext)
-  useEffect(() => {
-    onAuthStateChanged(authFirebase, (user) => {
-      if (user) {
-        // User logueado
-        setUsername(user.displayName)
-        dispatch(setUserSession(true))
-      } else {
-        // User no logueado
-        setUsername(null)
-        dispatch(setUserSession(false))
-      }
-    })
-  }, [])
+  const { username } = useUser()
 
   return (
     <div className="flex justify-end w-2/5 items-center gap-x-2">
@@ -39,7 +21,7 @@ export const UserMenu = () => {
     :
       <>
       <Link to="/login" className="uppercase">Login</Link>
-      <span className="px-4 text-zinc-700"> // </span>
+      <span className="px-4 text-zinc-700">{` // `}</span>
       <Link to="/register" className="uppercase">Sign up</Link>
       </>
     }

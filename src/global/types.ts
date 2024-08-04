@@ -24,6 +24,7 @@ export type StarshipDataProps = StarshipBasicProps & {
   created: string
   edited: string
   url: string
+  image?: string
 }
 export type FormRegisterInputs = {
   username: string
