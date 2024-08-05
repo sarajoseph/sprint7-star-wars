@@ -1387,6 +1387,10 @@ html {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .size-6 {
   width: 1.5rem;
   height: 1.5rem;
@@ -1398,14 +1402,6 @@ html {
 
 .h-6 {
   height: 1.5rem;
-}
-
-.w-2\/5 {
-  width: 40%;
-}
-
-.w-3\/5 {
-  width: 60%;
 }
 
 .w-5 {
@@ -1458,10 +1454,6 @@ html {
   align-items: center;
 }
 
-.justify-end {
-  justify-content: flex-end;
-}
-
 .justify-center {
   justify-content: center;
 }
@@ -1472,11 +1464,6 @@ html {
 
 .gap-4 {
   gap: 1rem;
-}
-
-.gap-x-2 {
-  -moz-column-gap: 0.5rem;
-       column-gap: 0.5rem;
 }
 
 .gap-y-10 {
@@ -1712,6 +1699,10 @@ html {
 }
 
 @media (min-width: 768px) {
+  .md\:block {
+    display: block;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -1736,8 +1727,13 @@ html {
     flex-wrap: wrap;
   }
 
-  .md\:items-center {
-    align-items: center;
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .md\:gap-x-2 {
+    -moz-column-gap: 0.5rem;
+         column-gap: 0.5rem;
   }
 
   .md\:gap-x-4 {

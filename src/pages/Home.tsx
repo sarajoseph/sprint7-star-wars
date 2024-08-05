@@ -51,10 +51,10 @@ export const Home = () => {
   return (
 		<>
 		<Header />
-    <main className="flex flex-col text-center gap-y-10 max-w-3xl mx-auto py-20 text-zinc-500">
+    <main className="flex flex-col items-center gap-y-10 max-w-3xl mx-auto py-20 text-zinc-500">
       <h1 className="text-5xl font-bold">Welcome{ username && <span className="capitalize"> {username}</span> }!</h1>
       <HomeDescription />
-      <div className='flex flex-col gap-4 items-center justify-center md:flex-row'>
+      <div className='flex flex-col gap-4 justify-center md:flex-row'>
         <Link to="/starships" className="btn btn-neutral mx-auto w-fit">
           Go to Starships
         </Link>
