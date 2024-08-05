@@ -42,3 +42,7 @@ export type FilmsType = {
   episode_id: number,
   image: string,
 }[]
+export type gifProps = {
+  id: string,
+  alt_text: string
+}

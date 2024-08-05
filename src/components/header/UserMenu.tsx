@@ -15,7 +15,7 @@ export const UserMenu = () => {
     {authFirebase.currentUser !== null ?
       <>
       <UserIcon />
-      <p>¡Hola <b className="capitalize ml">{username}</b>!</p>
+      <p>¡Hi <b className="capitalize ml">{username}</b>!</p>
       <button onClick={() => userLogout()} className="hover:opacity-80"><LogoutIcon /></button>
       </>
     :
