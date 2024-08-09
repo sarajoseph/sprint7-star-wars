@@ -5,26 +5,26 @@ import { Header } from '../components/header/Header'
 import { useNavMenu } from '../hooks/useNavMenu'
 import { useGif } from '../hooks/useGif'
 import { useEffect, useState } from 'react'
-import { gifProps } from '../global/types'
+import { GifProps } from '../global/types'
 import { useUser } from '../hooks/useUser'
 
 export const Home = () => {
   useNavMenu(true, false)
   const { gifIsSuccess, setRandomGif, requestGif } = useGif()
-  const [ gif, setGif ] = useState<gifProps | null>(requestGif)
-  const { username } = useUser()
+  const [ gif, setGif ] = useState<GifProps | null>(requestGif)
+  const user = useUser()
 
   useEffect(() => {
     setGif(requestGif)
   }, [requestGif])
 
   const HomeDescription = () => {
-    if (!username) {
+    if (!user) {
       return (
         <>
         <img src="https://media.giphy.com/media/cw57Zj5jydM2EU50Ju/giphy.gif" alt="Star Wars Gif" />
         <p>
-          To view the content of the entire website you must log in or register.
+          To view the content of the entire website you must log in or register
           {gifIsSuccess && gif &&
           <span>, but down here you can generate a new gif!</span>
           }
@@ -52,7 +52,7 @@ export const Home = () => {
 		<>
 		<Header />
     <main className="flex flex-col items-center gap-y-10 max-w-3xl mx-auto py-20 text-zinc-500">
-      <h1 className="text-5xl font-bold">Welcome{ username && <span className="capitalize"> {username}</span> }!</h1>
+      <h1 className="text-5xl font-bold">Welcome{ user?.username && <span className="capitalize"> {user?.username}</span> }!</h1>
       <HomeDescription />
       <div className='flex flex-col gap-4 justify-center md:flex-row'>
         <Link to="/starships" className="btn btn-neutral mx-auto w-fit">
@@ -60,7 +60,7 @@ export const Home = () => {
         </Link>
         {gifIsSuccess && gif &&
         <button onClick={setRandomGif} className="btn btn-neutral mx-auto w-fit">
-          Get random gif
+          Get a random gif
         </button>
         }
       </div>

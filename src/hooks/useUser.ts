@@ -1,21 +1,24 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { useContext, useEffect } from 'react'
-import { StarwarsContext } from '../context/StarwarsContext'
+import { useEffect } from 'react'
 import { authFirebase } from '../firebase/client'
+import { useAppDispatch, useAppSelector } from './store'
+import { setUser, unsetUser } from '../store/user/slice'
+import { UserProps } from '../global/types'
 
-export const useUser = () => {
-  const { username, setUsername } = useContext(StarwarsContext)
+export const useUser = (): UserProps | null => {
+  const user: UserProps | null = useAppSelector((state) => state.user)
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    onAuthStateChanged(authFirebase, (user) => {
-      if (user) {
+    onAuthStateChanged(authFirebase, (firebaseUser) => {
+      if (firebaseUser) {
         // User logueado
-        setUsername(user.displayName)
+        dispatch(setUser({username: firebaseUser.displayName, email: firebaseUser.email}))
       } else {
         // User no logueado
-        setUsername(null)
+        dispatch(unsetUser())
       }
     })
   }, [])
 
-  return { username }
+  return user
 }

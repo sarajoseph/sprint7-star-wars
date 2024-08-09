@@ -9,7 +9,10 @@ import { SuccessIcon } from '../components/icons/SuccessIcon'
 import { FieldValues, useForm } from 'react-hook-form'
 import { FormRegisterInputs } from '../global/types'
 import { useSignUp } from '../hooks/useSignUp'
+import { useNavMenu } from '../hooks/useNavMenu'
+
 export const Register = () => {
+  useNavMenu()
   const [ status, setStatus ] = useState<null | string>(null)
   const { signUpStatus, signUp } = useSignUp()
   const {

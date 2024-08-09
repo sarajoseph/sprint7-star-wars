@@ -10,9 +10,9 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { useNavMenu } from '../hooks/useNavMenu'
 
 export const Starships = () => {
+  useNavMenu(false, true)
   const starships = useAppSelector((state) => state.starships)
   const { isPending, isSuccess, isError, error, fetchNextPage, hasNextPage } = useStarships()
-  useNavMenu(false, true)
 
   if (isError && error) return <NotFound databaseError={error} />
 

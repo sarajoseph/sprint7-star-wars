@@ -10,10 +10,10 @@ import { StarshipFilms } from '../components/StarshipFilms'
 import { useNavMenu } from '../hooks/useNavMenu'
 
 export const Starship = () => {
+  useNavMenu(false, true)
   const { params } = useParams()
   const starshipID = params !== undefined ? params : ''
   const { status, error, starshipData } = useStarship(starshipID)
-  useNavMenu(false, true)
 
   if (status === 'error' && error) return <NotFound databaseError={error} />
 

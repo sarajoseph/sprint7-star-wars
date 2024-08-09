@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react'
 import { Loading } from '../components/icons/Loading'
 import { ErrorIcon } from '../components/icons/ErrorIcon'
 import { useLogin } from '../hooks/useLogin'
+import { useNavMenu } from '../hooks/useNavMenu'
 
 export const Login = () => {
+  useNavMenu()
   const [ status, setStatus ] = useState<null | string>(null)
   const { loginStatus, login } = useLogin()
 

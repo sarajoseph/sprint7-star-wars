@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchGifs } from '../services/gifs'
 import { useEffect, useState } from 'react'
-import { gifProps } from '../global/types'
+import { GifProps } from '../global/types'
 
 export const useGif = () => {
   const { isSuccess, isError, error, data } = useQuery({
@@ -12,7 +12,7 @@ export const useGif = () => {
   if (isError) {
     console.log(error)
   }
-  const [ requestGif, setRequestGif ] = useState<gifProps | null>(null)
+  const [ requestGif, setRequestGif ] = useState<GifProps | null>(null)
 
   useEffect(() => {
     if (isSuccess) {

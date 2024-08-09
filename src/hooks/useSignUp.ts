@@ -1,11 +1,12 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { authFirebase } from '../firebase/client'
-import { StarwarsContext } from '../context/StarwarsContext'
+import { useAppDispatch } from './store'
+import { setUser } from '../store/user/slice'
 
 export const useSignUp = () => {
   const [ signUpStatus, setSignUpStatus ] = useState<string | null>(null)
-  const { setUsername } = useContext(StarwarsContext)
+  const dispatch = useAppDispatch()
   const signUp = async (displayName: string, email: string, password: string) => {
     console.log('signUp')
     setSignUpStatus('loading')
@@ -17,7 +18,7 @@ export const useSignUp = () => {
             .then(() => {
               setSignUpStatus('success')
               authFirebase.currentUser?.reload().then(() => {
-                setUsername(authFirebase.currentUser?.displayName)
+                dispatch(setUser({username: authFirebase.currentUser?.displayName, email: authFirebase.currentUser?.email}))
               })
             }).catch((error) => {
               console.log(error)
