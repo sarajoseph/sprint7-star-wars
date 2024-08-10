@@ -1,9 +1,9 @@
- # Web budget calculator  
+ # Star Wars  
   
 Website that shows the list of the Star Wars starships with all the detailed information about each of them.  
 API: [swapi.dev](https://swapi.dev)  
    
-<!-- Falta imagen o gif -->
+<img alt="readme gif" src="./public/images/screenrecord.gif">
   
   
 ## Getting started  

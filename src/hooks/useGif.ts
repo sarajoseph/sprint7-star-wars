@@ -12,20 +12,20 @@ export const useGif = () => {
   if (isError) {
     console.log(error)
   }
-  const [ requestGif, setRequestGif ] = useState<GifProps | null>(null)
+  const [ gif, setGif ] = useState<GifProps | null>(null)
 
   useEffect(() => {
     if (isSuccess) {
-      setRequestGif(getRandomGif())
+      setGif(getRandomGif())
     }
   }, [isSuccess, data])
 
   const getRandomGif = () => {
     if (isSuccess) {
-      const gifs = data.map((gif: any) => {
+      const gifs = data.map((g: any) => {
         return {
-          id: gif.id,
-          alt_text: gif.alt_text || gif.title || 'Star Wars GIF'
+          id: g.id,
+          alt_text: g.alt_text || g.title || 'Star Wars GIF'
         }
       })
       const randomPosition = Math.floor(Math.random() * gifs.length)
@@ -37,9 +37,9 @@ export const useGif = () => {
 
   const setRandomGif = () => {
     const randomGif = getRandomGif()
-    setRequestGif(randomGif)
+    setGif(randomGif)
   }
 
-  return { gifIsSuccess: isSuccess, setRandomGif, requestGif }
+  return { gifIsSuccess: isSuccess, setRandomGif, gif }
 
 }
